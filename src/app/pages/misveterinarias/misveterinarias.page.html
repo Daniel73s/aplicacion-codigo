@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button  defaultHref="/tabs/login"> 
+      </ion-back-button>  
+       <ion-title>Mi Veterinaria</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row *ngIf="!misveterinarias">
+      <ion-col>
+        <div class="loading">
+          <ion-spinner name="crescent"></ion-spinner>
+          Cargando Veterinaria...
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let item of misveterinarias">
+            <ion-thumbnail slot="start">
+              <img [src]="item.imagen" appImagen alt="veterinaria">
+            </ion-thumbnail>
+            <ion-label>
+              <h3>{{item.nombre}}</h3>
+              <p>VETERINARIA</p>
+            </ion-label>
+            <ion-button slot="end" fill="clear" (click)="presentActionSheet(item.codvet)">
+              <ion-icon name="ellipsis-vertical" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

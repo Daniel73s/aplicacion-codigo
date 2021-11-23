@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="/tabs/login" *ngIf="veterinaria" icon="close-circle">
+      </ion-back-button>
+      <ion-title>Modificar veterinaria</ion-title>
+      <ion-toggle slot="end" [checked]="ac" *ngIf="imagen" (ionChange)="abrirCerrar($event,codvet)"></ion-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row *ngIf="!veterinaria">
+      <ion-col>
+        <div class="loading">
+          <ion-spinner name="crescent"></ion-spinner>
+          Cargando...
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-lg="6" >
+        <div class="container-imagen" *ngIf="imagen">
+          <img [src]="urlImage | async" alt="usuario" *ngIf="urlImage | async">
+          <img [src]="imagen" appImagen alt="imagen veterinaria" *ngIf="!urlImage">
+          <ion-progress-bar [value]="uploadPercent | async" *ngIf="uploadPercent"></ion-progress-bar>
+          <div class="fileUpload botonImagen" >
+            <span>Modificar Imagen</span>
+            <input type="file" class="upload" size="3000" accept=".png, .jpg" (change)="uploadFile($event)"/>
+         </div>
+        </div>
+      </ion-col>
+      <ion-col size-sm="12" size-lg="6" >
+        <form [formGroup]="formulario" *ngIf="imagen">
+          <ion-list>
+            <ion-list-header>
+              <h3>Modificar Veterinaria</h3>
+            </ion-list-header>
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input formControlName="nombre"></ion-input>
+            </ion-item>
+            <small class="mensajeError" *ngIf="this.formulario.get('nombre').touched">{{getError('nombre')}}</small>
+            <ion-item>
+              <ion-label position="floating">Descripcion</ion-label>
+              <ion-textarea formControlName="descripcion"></ion-textarea>
+            </ion-item>
+            <small class="mensajeError" *ngIf="this.formulario.get('descripcion').touched">{{getError('descripcion')}}</small>
+            <ion-item>
+              <ion-label position="floating">Direccion</ion-label>
+              <ion-textarea formControlName="direccion"></ion-textarea>
+            </ion-item>
+            <small class="mensajeError" *ngIf="this.formulario.get('direccion').touched">{{getError('direccion')}}</small>
+            <ion-item>
+              <ion-label position="floating">Horario de atencion</ion-label>
+              <ion-textarea formControlName="horarioatencion"></ion-textarea>
+            </ion-item>
+            <small class="mensajeError" *ngIf="this.formulario.get('horarioatencion').touched">{{getError('horarioatencion')}}</small>
+            <ion-item>
+              <ion-label position="floating">Telefono/Celular</ion-label>
+              <ion-input formControlName="telefono"></ion-input>
+            </ion-item>
+            <small class="mensajeError" *ngIf="this.formulario.get('telefono').touched">{{getError('telefono')}}</small>
+            <ion-item>
+              <ion-label>Atencion a Domicilio</ion-label>
+              <ion-toggle slot="end" formControlName="atenciondom"></ion-toggle>
+            </ion-item>
+            <small class="mensajeError" *ngIf="this.formulario.get('atenciondom').touched">{{getError('atenciondom')}}</small>
+            <br>
+            <ion-button color="primary" size="block" (click)="modificar()" [disabled]="formulario.invalid">
+              Guardar Cambios
+            </ion-button>
+          </ion-list>
+        </form>
+        <input type="hidden" #Imagevet [value]="urlImage | async">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

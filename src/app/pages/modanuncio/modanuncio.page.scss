@@ -1,0 +1,51 @@
+*{
+    font-family: 'Poppins', sans-serif;
+  }
+  .container-imagen{
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    }
+    .container-imagen > img{
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      object-position: center;
+      border: 2px solid rgb(243, 242, 242);
+      padding: 2px;
+    }
+    .fileUpload {
+      position: relative;
+      overflow: hidden;
+      margin: 10px;
+  }
+  .fileUpload input.upload {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      filter: alpha(opacity=0);
+  }
+  .botonImagen{
+      // border: 1px solid red;
+      padding: 10px;
+      background-color: var(--ion-color-tertiary);
+      border-radius: 5px;
+  }
+  .botonImagen > span{
+      color: var(--ion-color-primary);
+      font-weight: 500;
+  }
+  .mensajeError{
+    color: red;
+    // background-color: rgb(255, 236, 236);
+    padding: 10px;
+    border-radius: 10px;
+  }

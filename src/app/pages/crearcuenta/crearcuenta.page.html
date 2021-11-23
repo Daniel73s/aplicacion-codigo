@@ -1,0 +1,71 @@
+<ion-content style="--background:#fff !important;">
+  <div class="login-section ion-padding">
+    <div class="heading ion-padding">
+        <h2>Crear Nueva Cuenta</h2>
+        <p>Empezemos!!!</p>
+    </div>
+    <form [formGroup]="formulario" (ngSubmit)="submit()">
+      <ion-list>
+        <ion-list-header>
+          <ion-icon name="man" style="margin-right: 10px;"></ion-icon> Datos Personales
+        </ion-list-header>
+        <ion-item>
+         <ion-label position="floating">Nombre</ion-label>
+         <ion-input formControlName="nombre"></ion-input>
+        </ion-item>
+        <small class="mensajeError" *ngIf="this.formulario.get('nombre').touched">{{getError('nombre')}}</small>
+       <ion-item>
+         <ion-label position="floating">Apellido paterno</ion-label>
+         <ion-input formControlName="ap"></ion-input>
+       </ion-item>
+       <small class="mensajeError" *ngIf="this.formulario.get('ap').touched">{{getError('ap')}}</small>
+       <ion-item>
+         <ion-label position="floating">Apellido Materno</ion-label>
+         <ion-input formControlName="am"></ion-input>
+       </ion-item>
+       <small class="mensajeError" *ngIf="this.formulario.get('am').touched">{{getError('am')}}</small>
+       <ion-item>
+         <ion-label position="floating">Telefono/Celular</ion-label>
+         <ion-input formControlName="celular"></ion-input>
+       </ion-item>
+       <small class="mensajeError" *ngIf="this.formulario.get('celular').touched">{{getError('celular')}}</small>
+       <ion-item>
+         <ion-label position="floating">Direccion</ion-label>
+         <ion-input formControlName="direccion"></ion-input>
+       </ion-item>
+       <small class="mensajeError" *ngIf="this.formulario.get('direccion').touched">{{getError('direccion')}}</small>
+       <ion-item>
+         <ion-label position="floating">Fecha de Nacimiento</ion-label>
+         <ion-datetime displayFormat="MMM DD, YYYY" 
+                       formControlName="fechanac" 
+                       monthShortNames="enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, deciembre">
+         </ion-datetime>           
+       </ion-item>
+       <small class="mensajeError" *ngIf="this.formulario.get('fechanac').touched">{{getError('fechanac')}}</small>
+      </ion-list>
+     <ion-list>
+       <ion-list-header>
+         <ion-icon name="person" style="margin-right: 10px;"></ion-icon> Usuario 
+       </ion-list-header>
+       <ion-item>
+         <ion-label position="floating">Usuario</ion-label>
+         <ion-input  readonly color="danger" value="El usuario se creara Automaticamente"></ion-input>
+       </ion-item>
+       <ion-item>
+         <ion-label position="floating">Password</ion-label>
+         <ion-input type="Password" formControlName="clave"></ion-input>
+       </ion-item>
+       <small class="mensajeError" *ngIf="this.formulario.get('clave').touched">{{getError('clave')}}</small>
+       <ion-item>
+         <ion-label position="floating">Confirmar Password</ion-label>
+         <ion-input type="Password" formControlName="repclave"></ion-input>
+       </ion-item>
+       <small class="mensajeError" *ngIf="this.formulario.get('repclave').touched">{{getError('repclave')}}</small>
+     </ion-list> 
+     <ion-button type="submit" [disabled]="formulario.invalid">Registrarse</ion-button>
+    </form>  
+  </div>
+</ion-content>
+
+
+

@@ -1,0 +1,7 @@
+{
+  "name": "dogi",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

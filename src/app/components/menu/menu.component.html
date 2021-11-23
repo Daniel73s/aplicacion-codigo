@@ -1,0 +1,29 @@
+<ion-menu side="start" type="push" contentId="main" menuId="menuapp">
+
+  <ion-content>
+    <div class="menu-header-bg"></div>
+    <div class="header-content">
+      <img src="../../../assets/avatar/user.svg" alt="usuario" *ngIf="!usuario">
+      <img [src]="usuario.foto" alt="usuario" *ngIf="usuario">
+      <ion-label>
+        <h2  *ngIf="usuario">{{usuario.ap}} {{usuario.am}} {{usuario.nombre}}</h2>
+        <p  *ngIf="usuario">VETERINARIO(A)</p>
+        <h2  *ngIf="!usuario">Desconocido</h2>
+      </ion-label>
+    </div>
+    <div class="action-button" *ngIf="usuario">
+      <ion-button (click)="misveterinarias(usuario.codper)">Mi veterinaria</ion-button>
+    </div>
+    <ion-list lines="none" class="menu-items">
+     <ion-item>
+        <ion-icon name="home"></ion-icon> Inicio
+     </ion-item>
+     <ion-item>
+      <ion-icon name="home"></ion-icon> veterinarias
+      </ion-item>
+      <ion-item > <!--class="active"-->
+      <ion-icon name="home"></ion-icon> Mi perfil
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

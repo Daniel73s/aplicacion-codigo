@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary" menu="menuapp"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <p class="texto">Bienvenido a la aplicacion para buscar tus veterinarias favoritas</p> -->
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <!--Etiquetas-->
+        <div class="etiqueta" *ngIf="!usuario">
+          <div class="chip">
+            <ion-item lines="none">
+              <ion-avatar slot="start">
+                <img src="https://firebasestorage.googleapis.com/v0/b/talleriii-4de86.appspot.com/o/fotosPerfil%2Fuser.png?alt=media&token=dd40b091-627f-4fc0-90d3-a433d777d66b" alt="">
+              </ion-avatar>
+              <ion-label>
+                <h2>Desconosido</h2>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
+        <div class="etiqueta" *ngIf="usuario">
+          <div class="chip">
+            <ion-item lines="none">
+              <ion-avatar slot="start">
+                <img [src]="usuario.foto" appImagen alt="usuario">
+              </ion-avatar>
+              <ion-label>
+                <h2>{{usuario.nombre}}</h2>
+                <h3>{{usuario.ap}} {{usuario.am}}</h3>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!--Veterinarias Abiertas-->
+        <ion-list>
+          <ion-list-header>
+            <h5>Veterinarias Abiertas <ion-icon name="checkmark-circle" color="primary"></ion-icon></h5>
+          </ion-list-header>
+          <br>
+          <ion-slides pager="false" [options]="slideOpts" *ngIf="estadoV">
+            <ion-slide *ngFor="let vet of [1,1,1,1,1,1,1,1,1,1]">
+              <!--veterinarias fakes-->
+              <div class="card-container">
+                <div class="container-avatar">
+                  <ion-skeleton-text animated style="border-radius: 15px;"></ion-skeleton-text>
+                </div>
+                <p>
+                  <small><ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text></small>
+                </p>
+              </div>
+            </ion-slide>
+          </ion-slides>
+          <ion-slides pager="false" [options]="slideOpts">
+            <ion-slide *ngFor="let vet of veterinarias">
+              <!--veterinarias-->
+              <div class="card-container" (click)="infoveterinaria(vet.codvet)">
+                <div class="container-avatar">
+                  <img [src]="vet.imagen" appImagen alt="">
+                </div>
+                <small>{{vet.nombre | lowercase | slice:0:12}}</small>
+              </div>
+            </ion-slide>
+          </ion-slides>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!--Favoritos-->
+        <ion-list>
+          <ion-list-header>
+            <h5>Favoritos <ion-icon name="star" color="warning"></ion-icon></h5>
+          </ion-list-header>
+          <div style="display: flex; width: 100%; justify-content: center; color: grey; align-items: center;"
+            *ngIf="datalocal.veterinarias.length==0">
+            <ion-label>
+              Agrega tu veterinaria favorita!!!
+            </ion-label>
+          </div>
+          <ion-slides pager="false" [options]="slideOptsFavoritos" *ngIf="datalocal.veterinarias">
+            <ion-slide *ngFor="let vet of datalocal.veterinarias">
+              <ion-card>
+                <div class="container-imagen-vet" (click)="infoveterinaria(vet.codvet)">
+                  <img appImagen [src]="vet.imagen" />
+                  <!--[src]="vet.imagen"-->
+                </div>
+                <ion-card-header>
+                  <div style="display: flex; justify-content: flex-start; flex-direction: column;">
+                    <ion-card-subtitle>{{vet.nombre}}</ion-card-subtitle>
+                    <ion-button fill="outline" color="danger" (click)="presentAlertConfirm(vet)">
+                      Eliminar
+                    </ion-button>
+                  </div>
+                </ion-card-header>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!--Anuncios-->
+        <ion-list>
+          <ion-list-header>
+            <h5>Anuncios <ion-icon name="document-text" color="secondary"></ion-icon></h5>
+          </ion-list-header>
+          <ion-slides pager="false" [options]="slideOptsAnuncios" *ngIf="estadoA">
+            <ion-slide *ngFor="let item of [1,1,1,1,1,1,1]">
+              <ion-card>
+                <ion-card-content>
+                  <ion-skeleton-text animated style="height:300px; width: 200px;"></ion-skeleton-text>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+          <ion-slides pager="false" [options]="slideOptsAnuncios">
+            <ion-slide *ngFor="let anuncio of anuncios">
+              <ion-card style="height: 350px;">
+                <div class="container-imagen" (click)="mostrarAnuncio(anuncio.codanuncio)">
+                  <img [src]="anuncio.imganuncio" appImagen />
+                </div>
+
+                <ion-card-header>
+                  <ion-card-subtitle>
+
+                    <ion-chip (click)="infoveterinaria(anuncio.codvet)">
+                      <ion-avatar>
+                        <img [src]="anuncio.imagen" appImagen >
+                      </ion-avatar>
+                      <ion-label>{{anuncio.nombre}}</ion-label>
+                    </ion-chip>
+
+
+                  </ion-card-subtitle>
+                  <ion-card-title (click)="mostrarAnuncio(anuncio.codanuncio)">{{anuncio.titulo | slice:0:25}}
+                  </ion-card-title>
+                </ion-card-header>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

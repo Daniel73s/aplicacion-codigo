@@ -1,0 +1,46 @@
+<ion-content>
+  <ion-grid fixed>
+    <ion-row *ngIf="!datanuncio">
+      <ion-col>
+        <div class="loading">
+          <ion-spinner name="crescent"></ion-spinner>
+          cargando...
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="datanuncio">
+      <ion-col>
+        <ion-back-button defaultHref="/tabs/home" text="" class="boton-regresar" icon="close-circle">
+        </ion-back-button>
+        <div class="container-imagen">
+          <img [src]="datanuncio.imganuncio" appImagen alt="" *ngIf="datanuncio"> <!---->
+        </div>
+        <div *ngIf="datanuncio">
+          <ion-list lines="none">
+            <ion-item>
+              <ion-avatar slot="start">
+                <img [src]="datanuncio.imagen" appImagen alt="">
+              </ion-avatar>
+              <ion-label>
+                <h3>{{datanuncio.nombre}}</h3>
+                <p>Veterinaria</p>
+              </ion-label>
+              <ion-button slot="end" fill="outline" (click)="redireccionarAveterinaria(datanuncio.codvet)">
+                <!-- <ion-icon slot="icon-only" name="exit"></ion-icon> -->
+                <ion-icon slot="start" name="star"></ion-icon>
+                ir a Veterinaria
+              </ion-button>
+            </ion-item>
+          </ion-list>
+          <div class="contenido">
+            <h3>{{datanuncio.titulo}}</h3>
+            <p>
+              {{datanuncio.texto | lowercase}}
+            </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

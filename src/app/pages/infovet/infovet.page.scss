@@ -1,0 +1,59 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+#map{
+    height: 60%; 
+  }
+  
+  .boton-regresar{
+    position: absolute;
+    top: 5px;
+    left: 12px;
+  
+  }
+  
+  ion-card {
+      overflow: unset !important;
+  }
+  
+  ion-card {
+      height: 200px;
+      border: none;
+  }
+  
+  
+  .chip {
+      display: inline-block;
+      padding: 0 25px;
+      height: 15px;
+      font-size: 10px;
+      line-height: 15px;
+      border-radius: 25px;
+      //
+      
+    }
+    
+    .chip img {
+      float: left;
+      margin: 0 10px 0 -25px;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+    }
+    
+    .activo{
+      border: 3px solid #1dbea5;
+    }
+    .inactivo{
+      border: 3px solid #dfdfdf;
+    }
+
+    .doctor-avatar{
+      width: 100%; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;
+    }
+    .doctor-avatar > ion-label > p {
+      color: gray;
+    }

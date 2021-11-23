@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button  defaultHref="/tabs/misveterinarias/1001"> 
+      </ion-back-button>  
+       <ion-title>Mis Anuncios</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="cambiar($event)" [value]="valueSelected">
+    <ion-segment-button value="todos">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="true">
+      <ion-label>Activos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="false">
+      <ion-label>Inactivos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-grid fixed>
+    <ion-row *ngIf="!misAnuncios">
+      <ion-col>
+        <div class="loading">
+          <ion-spinner name="crescent"></ion-spinner>
+          Cargando Anuncios...
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let item of misAnuncios | anunciofiltro:valueSelected:'estado'"> <!---->
+            <ion-thumbnail slot="start">
+              <img [src]="item.imagen" appImagen>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>{{item.titulo}}</h3>
+              <p>{{item.texto | lowercase}}</p>
+              <small>
+                {{item.fechacre | date}} 
+                <ion-icon *ngIf="item.estado" name="checkmark-circle" color="primary"></ion-icon>
+                <ion-icon *ngIf="!item.estado" name="close-circle" color="danger"></ion-icon>
+              </small>
+            </ion-label>
+            <ion-button slot="end" fill="clear" shape="round" color="secondary" (click)="modanuncio(item.codanuncio)">
+              <ion-icon slot="icon-only"  name="create"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button (click)="addanuncio()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+</ion-content>

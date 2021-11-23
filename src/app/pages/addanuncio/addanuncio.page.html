@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button  defaultHref="/tabs/misanuncios/{{codvet}}"> 
+      </ion-back-button>  
+       <ion-title>Adicionar anuncio</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="12" size-lg="6">
+              <div class="container-imagen">
+                <img [src]="urlImage | async" alt="usuario" *ngIf="urlImage | async">
+                <img src="./../../../assets/img/img-rota.png" alt="imagen veterinaria" *ngIf="!urlImage">
+                <ion-progress-bar [value]="uploadPercent | async" *ngIf="uploadPercent"></ion-progress-bar>
+              <div class="fileUpload botonImagen" >
+                <span>Subir Imagen</span>
+                <input type="file" class="upload" size="3000" accept=".png, .jpg"(change)="uploadFile($event)" /> <!--(change)="uploadFile($event)"-->
+             </div>
+            </div>
+    </ion-col>
+    <ion-col size="12" size-lg="6">
+      <form [formGroup]="formulario">
+        <ion-list>
+          <ion-list-header>
+            <h3>Adicionar Nuevo Anuncio</h3>
+          </ion-list-header>
+          <ion-item>
+            <ion-label position="floating">Titulo</ion-label>
+            <ion-input formControlName="titulo"></ion-input>
+          </ion-item>
+          <small class="mensajeError" *ngIf="this.formulario.get('titulo').touched">{{getError('titulo')}}</small>
+          <ion-item>
+            <ion-label position="floating">Detalle</ion-label>
+            <ion-textarea formControlName="texto"></ion-textarea>
+          </ion-item>
+          <small class="mensajeError" *ngIf="this.formulario.get('texto').touched">{{getError('texto')}}</small>
+        </ion-list>
+        <ion-button shape="round" size="block" (click)="agregar()" [disabled]="formulario.invalid">
+          Crear
+        </ion-button>
+      </form>
+      <input type="hidden" #ImageAnuncio [value]="urlImage | async">
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

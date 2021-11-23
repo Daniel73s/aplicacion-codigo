@@ -1,0 +1,127 @@
+
+<ion-content color="light" >   
+    <div id="map"></div>
+<ion-back-button  defaultHref="/tabs/veterinarias"
+	       text=""
+	       class="boton-regresar"
+	       icon="close-circle"> 
+</ion-back-button>  
+<ion-grid fixed>
+    <ion-row>
+       <ion-col>
+	<div *ngIf="ban">
+	      <ion-item lines="none" color="light">
+	      <ion-avatar slot="start" style="width: 50px; height: 50px;" [ngClass]="datosvet.ac?'activo':'inactivo'">
+		      <img [src]="datosvet.imagen" style="padding: 3px;" appImagen>
+	      </ion-avatar>
+	      <ion-label>
+		      <h3>{{datosvet.nombre}}</h3>
+		      <p class="text-grey">{{datosvet.ubicacion}}</p>
+		      <div  class="chip" style="background-color: var(--ion-color-light);">
+			      <div *ngIf="datosvet.ac">
+				       <img src="assets/img/activo.jpg" alt="Person" width="96" height="96">
+				      <span>Abierto</span>
+			      </div>
+			      <div *ngIf="!datosvet.ac" >
+				      <img src="assets/img/inactivo.jpg" alt="Person" width="96" height="96">
+				      <span>Cerrado</span>
+			      </div>
+		      </div>
+	      </ion-label>              
+	      </ion-item> 
+	</div>
+	<div *ngIf="!ban">
+		<ion-item lines="none" color="light">
+		<ion-avatar slot="start">
+			<ion-skeleton-text animated ></ion-skeleton-text>
+		</ion-avatar>
+		<ion-label>
+			<ion-skeleton-text style="width: 70%" animated ></ion-skeleton-text>
+			<ion-skeleton-text style="width: 80%" animated ></ion-skeleton-text>
+			<ion-skeleton-text style="width: 20%" animated ></ion-skeleton-text>
+		</ion-label>
+		</ion-item> 
+	</div>
+			  
+	<br>		  
+	<div *ngIf="ban">
+		<div *ngIf="Doctor" class="doctor-avatar">
+			<ion-avatar slot="start">
+				  <img [src]="Doctor.foto" appImagen alt="">
+			</ion-avatar>
+			<ion-label style="text-align: center;">
+				<h3>{{Doctor.ap}} {{Doctor.am}} {{Doctor.nombre}}</h3>
+				<p>Veterinario</p>
+			</ion-label>
+		</div>
+		
+	<ion-card style="height: auto;" mode="ios">
+			<ion-item  lines="none">
+				<ion-icon color="greytext" name="timer-outline" slot="start"></ion-icon>
+				<ion-label color="dark">Veterinaria</ion-label>
+			</ion-item>
+		<ion-card-content>
+	
+				<ion-label> {{datosvet.descripcion}}</ion-label>
+	
+		</ion-card-content>
+        </ion-card> 
+	<ion-card style="height: auto;" mode="ios">
+		<ion-item  lines="none" >
+			<ion-icon color="greytext" name="timer-outline" slot="start"></ion-icon>
+			<ion-label color="dark">Horarios de Atencion</ion-label>
+		</ion-item>
+	<ion-card-content>
+
+			<ion-label> {{datosvet.horarioatencion}}</ion-label>
+
+	</ion-card-content>
+	</ion-card> 
+		<ion-card style="height: auto;" mode="ios">
+			<ion-item  lines="none">
+				<ion-icon color="greytext" name="person-outline" slot="start" ></ion-icon>
+				<ion-label color="dark">Contactar</ion-label>
+			</ion-item>  
+			<ion-card-content>
+			<p>
+			<ion-skeleton-text style="width: 50%; height: 15px;" animated *ngIf="!ban"></ion-skeleton-text>
+			</p>
+			<p>{{datosvet.telefono}}</p>
+			</ion-card-content>  
+		</ion-card>
+		<ion-card style="height: auto;" mode="ios">
+			<ion-item  lines="none">
+				<ion-icon color="greytext" name="car-outline" slot="start"></ion-icon>
+				<ion-label color="dark">Atencion a Domicilio</ion-label>
+			</ion-item>
+			<ion-card-content>
+				<p *ngIf="datosvet.atenciondom">SE ATIENDE A DOMICILIO</p>
+				<p *ngIf="!datosvet.atenciondom"> EN ESTE MOMENTO NO.</p>
+	
+			</ion-card-content>  
+		</ion-card>
+	</div> 
+	<div *ngIf="!ban">
+		<ion-card style="height: auto;" mode="ios" *ngFor="let i of [1,1,1,1,1]">
+			<ion-item  lines="none">
+				<ion-avatar slot="start">
+					<ion-skeleton-text animated ></ion-skeleton-text>
+				</ion-avatar>
+				<ion-label> <ion-skeleton-text style="width: 80%" animated ></ion-skeleton-text></ion-label>
+			</ion-item>
+			<ion-card-content>
+				<p> <ion-skeleton-text style="width: 100%" animated ></ion-skeleton-text></p>
+				<p> <ion-skeleton-text style="width: 50%" animated ></ion-skeleton-text></p>
+			</ion-card-content>  
+		</ion-card>
+	</div>
+       </ion-col>
+    </ion-row>
+</ion-grid>
+
+
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" > 
+<ion-fab-button class="animated pulse infinite"  color="success" (click)="llamar(datosvet.telefono)"><ion-icon name="call"></ion-icon></ion-fab-button>
+</ion-fab>
+</ion-content>
