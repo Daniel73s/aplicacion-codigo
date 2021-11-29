@@ -40,6 +40,8 @@ export class InfovetPage implements OnInit {
    datosDoctor(){
      this.usu.datosPropietario(this.codvet).then((data:any)=>{
        this.Doctor=data[0];
+     
+       
      })
    }
 

@@ -57,3 +57,15 @@
     .doctor-avatar > ion-label > p {
       color: gray;
     }
+    .doctorundefined{
+      background-color: #f8cbcb;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .doctorundefined>span{
+      color: red;
+      
+    }

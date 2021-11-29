@@ -24,8 +24,11 @@ url='https://apidogi.herokuapp.com/usuarios';
     return this.http.post(`${this.url}/crearCuenta`,usuario).toPromise();
   }
   getpersonaById(codper:number){
-    return this.http.get(`${this.url}/listarPersonaById/${codper}`).toPromise();
+    return this.http.get(`${this.url}/imprimirPersona/${codper}`).toPromise();
   }
+
+ 
+  // listarPersonaById
 
   modpersona(codper:number,persona:any){
     return this.http.put(`${this.url}/modPersona/${codper}`,persona).toPromise();

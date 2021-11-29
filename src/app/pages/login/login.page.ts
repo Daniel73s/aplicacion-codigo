@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   formularioEdicion: FormGroup;
   codper: number;
   foto: string;
-  rolInfo: any;
+  rolInfo: any={nombre:'',codrol:''};
   estado: boolean;
   formularioClave: FormGroup;
   loading: any;
@@ -84,8 +84,11 @@ export class LoginPage implements OnInit {
         this.usuario = null;
       } else {
         this.usuario = this.usu.decodificar(data);
+        
         this.infopersona(this.usuario.codper);
-        this.getRolById(this.usuario.codrol);
+        //console.log(this.usuario);
+        // this.getRolById(this.usuario.codrol);
+
       }
     });
   }
@@ -97,6 +100,8 @@ export class LoginPage implements OnInit {
     const persona = await this.usu.getpersonaById(codper);
     this.codper = persona[0].codper;
     this.foto = persona[0].foto;
+    this.rolInfo.codrol=persona[0].codrol;
+    this.rolInfo.nombre=persona[0].rol;
     this.formularioEdicion = this.fb.group({
       nombre: [persona[0].nombre, [Validators.required, Validators.maxLength(35), Validators.pattern(this.regex)]],
       ap: [persona[0].ap, [Validators.required, Validators.maxLength(35), Validators.pattern(this.regex)]],
@@ -149,16 +154,15 @@ export class LoginPage implements OnInit {
 
   miveterinaria(codper: number) {
     this.router.navigate([`/tabs/misveterinarias/${codper}`]);
-
   }
 
-  getRolById(codrol: number) {
+  /*getRolById(codrol: number) {
     this.rol.getRolById(codrol).then((data: any) => {
       this.rolInfo = data[0];
     }).catch(e => {
       this.Mensaje('Ocurrio un error inesperado');
     })
-  }
+  }*/
 
   cambiarestado(e: any) {
     this.estado = e.detail.checked;

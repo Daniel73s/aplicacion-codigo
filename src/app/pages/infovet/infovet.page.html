@@ -45,7 +45,7 @@
 			  
 	<br>		  
 	<div *ngIf="ban">
-		<div *ngIf="Doctor" class="doctor-avatar">
+		<div *ngIf="Doctor else mensajealerta" class="doctor-avatar">
 			<ion-avatar slot="start">
 				  <img [src]="Doctor.foto" appImagen alt="">
 			</ion-avatar>
@@ -54,10 +54,16 @@
 				<p>Veterinario</p>
 			</ion-label>
 		</div>
+
+		<ng-template #mensajealerta>
+           <div class="doctorundefined">
+               <span>No se asigno veterinario</span>
+		   </div>
+		</ng-template>
 		
 	<ion-card style="height: auto;" mode="ios">
 			<ion-item  lines="none">
-				<ion-icon color="greytext" name="timer-outline" slot="start"></ion-icon>
+				<ion-icon color="greytext" name="home-outline" slot="start"></ion-icon>
 				<ion-label color="dark">Veterinaria</ion-label>
 			</ion-item>
 		<ion-card-content>
@@ -121,7 +127,7 @@
 
 
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="end" > 
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="Doctor"> 
 <ion-fab-button class="animated pulse infinite"  color="success" (click)="llamar(datosvet.telefono)"><ion-icon name="call"></ion-icon></ion-fab-button>
 </ion-fab>
 </ion-content>
