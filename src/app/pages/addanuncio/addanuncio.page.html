@@ -14,7 +14,7 @@
     <ion-col size="12" size-lg="6">
               <div class="container-imagen">
                 <img [src]="urlImage | async" alt="usuario" *ngIf="urlImage | async">
-                <img src="./../../../assets/img/img-rota.png" alt="imagen veterinaria" *ngIf="!urlImage">
+                <img src="https://firebasestorage.googleapis.com/v0/b/talleriii-4de86.appspot.com/o/anuncios%2Fdefault.jpg?alt=media&token=02e4e452-7184-476b-ae52-95dacd3e0525" alt="imagen veterinaria" *ngIf="!urlImage">
                 <ion-progress-bar [value]="uploadPercent | async" *ngIf="uploadPercent"></ion-progress-bar>
               <div class="fileUpload botonImagen" >
                 <span>Subir Imagen</span>
